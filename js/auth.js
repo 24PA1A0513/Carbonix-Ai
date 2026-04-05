@@ -164,11 +164,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
                 }
             } catch (error) {
+                console.error("Auth error:", error);
                 let msg = 'Authentication failed. Please check your credentials.';
                 if (error.code === 'auth/email-already-in-use') msg = 'Email is already in use.';
                 if (error.code === 'auth/weak-password') msg = 'Password should be at least 6 characters.';
                 if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') msg = 'Invalid email or password.';
-                showError(msg);
+                
+                // Show the raw error message to help debug hosting issues
+                showError(`${msg} (${error.message})`);
             } finally {
                 btnStates(false);
             }
