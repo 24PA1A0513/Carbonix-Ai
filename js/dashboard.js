@@ -119,6 +119,31 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Slight delay to ensure canvas exists and styles apply
     setTimeout(initCharts, 500);
+
+    // --- Mobile Menu Toggle ---
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+    if (mobileMenuBtn && sidebar && sidebarOverlay) {
+        const toggleSidebar = () => {
+            sidebar.classList.toggle('open');
+            sidebarOverlay.classList.toggle('show');
+        };
+        
+        mobileMenuBtn.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+        
+        // Close sidebar when clicking a nav item on mobile
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                    sidebarOverlay.classList.remove('show');
+                }
+            });
+        });
+    }
 });
 
 // Watch theme changes to update chart text colors

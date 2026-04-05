@@ -1098,6 +1098,19 @@ input[type=range] {
 }
 
 /* --- Responsive Layout --- */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(2px);
+  z-index: 90;
+}
+.sidebar-overlay.show { display: block; }
+
+.mobile-menu-btn { display: none; }
+.topbar-title-group { display: flex; align-items: center; gap: 0.75rem; }
+
 @media (max-width: 991px) {
   .charts-grid, .prediction-grid {
     grid-template-columns: 1fr;
@@ -1105,17 +1118,51 @@ input[type=range] {
 }
 
 @media (max-width: 768px) {
+  /* Dashboard Sidebar */
+  .mobile-menu-btn { display: flex; }
   .sidebar {
     transform: translateX(-100%);
   }
   .sidebar.open {
     transform: translateX(0);
-    box-shadow: var(--shadow-xl);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.5);
   }
   .main-content {
     margin-left: 0;
   }
-  /* Would need an overlay in real app */
+  .topbar {
+    padding: 1rem;
+  }
+  .sections-container {
+    padding: 0 1rem 3rem 1rem;
+  }
+
+  /* Login Page Split */
+  .login-split-container {
+    flex-direction: column;
+  }
+  .login-promo {
+    flex: none;
+    padding: 2.5rem 1.5rem;
+  }
+  .promo-heading {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .promo-stats {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .circle-1, .circle-2 {
+    display: none; /* remove large circles on mobile */
+  }
+  .login-form-area {
+    padding: 2rem 1.5rem;
+    flex: 1;
+    align-items: flex-start;
+  }
+  .login-form-wrapper { max-width: 100%; }
 }
 
 /* ============================================================
